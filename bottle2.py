@@ -18,9 +18,12 @@ def find_bottle():
     cv2.circle(img, (x+w, y+h), 1, (0, 0, 150), 4)
     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0))
 
-    bottle = img[y:y+h, x:x+w]
-    cv2.imshow("Final", bottle)
-    label = img[y+h/2:y+h, x+w/2:x+w]
+    # bottle = img[y:y+h, x:x+w]
+    x1 = (x+w/2) + 50
+    x2 = x+w
+    y1 = y+h/2
+    y2 = y+h-50
+    label = img[y1:y2, x1:x2]
     cv2.imshow("Label", label)
     cv2.waitKey(0)
 
