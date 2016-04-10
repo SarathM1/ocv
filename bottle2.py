@@ -15,9 +15,6 @@ def find_bottle():
     index = np.argmax(areas)
     cnt = cnts[index]
     x, y, w, h = cv2.boundingRect(cnt)
-    cv2.circle(img, (x, y), 1, (150, 0, 0), 4)
-    cv2.circle(img, (x+w, y+h), 1, (0, 0, 150), 4)
-    cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0))
 
     # bottle = img[y:y+h, x:x+w]
     x1 = (x+w/2) + 50
@@ -25,12 +22,6 @@ def find_bottle():
     y1 = y+h/2
     y2 = y+h-50
     label = img[y1:y2, x1:x2]
-    cv2.imwrite("label.jpg", label)
-    """label_hsv = cv2.cvtColor(label, cv2.COLOR_BGR2HSV)
-    blue_low = np.array([107, 50, 50], np.uint8)
-    blue_high = np.array([112, 255, 255], np.uint8)
-    thresh = cv2.inRange(label_hsv, blue_low, blue_high)
-    """
     cv2.imshow("Label", label)
 
     gray = cv2.cvtColor(label, cv2.COLOR_BGR2GRAY)
@@ -46,9 +37,8 @@ def find_bottle():
     img[y1:y2, x1:x2] = label
     e2 = cv2.getTickCount()
     time = (e2 - e1) / cv2.getTickFrequency()
-    print time
+    print "Completed in : ", time, " secs"
     cv2.imshow("Final", img)
-    cv2.imwrite("final2.jpg", img)
     cv2.waitKey(0)
 
 if __name__ == '__main__':
