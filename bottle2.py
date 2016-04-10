@@ -24,7 +24,13 @@ def find_bottle():
     y1 = y+h/2
     y2 = y+h-50
     label = img[y1:y2, x1:x2]
+    cv2.imwrite("label.jpg", label)
+    label_hsv = cv2.cvtColor(label, cv2.COLOR_BGR2HSV)
+    blue_low = np.array([107, 50, 50], np.uint8)
+    blue_high = np.array([112, 255, 255], np.uint8)
+    thresh = cv2.inRange(label_hsv, blue_low, blue_high)
     cv2.imshow("Label", label)
+    cv2.imshow("thresh", thresh)
     cv2.waitKey(0)
 
 if __name__ == '__main__':
